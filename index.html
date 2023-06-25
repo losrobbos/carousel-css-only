@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel CSS only</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .viewbox {
+      width: 300px;
+      height: 200px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .box {
+      width: 300px;
+      height: 200px;
+      border: 1px solid #ccc;
+      display: grid;
+      place-items: center;
+    }
+
+    /* background images */
+    .box:nth-of-type(1) {
+      background-image: url(//source.unsplash.com/300x200?mona-lisa);
+    }
+
+    .box:nth-of-type(2) {
+      background-image: url(//source.unsplash.com/300x200?monet);
+    }
+
+    .box:nth-of-type(3) {
+      background-image: url(//source.unsplash.com/300x200?picasso);
+    }
+
+    .content {
+      width: 900px;
+      display: flex;
+      animation: roundAndRound 12s ease 2s infinite;
+    }
+
+    @keyframes roundAndRound {
+      0% {
+        transform: translateX(0px);
+      }
+
+      /* scroll quickly, after 10%, to next state. and hold a bit */
+      10%,
+      40% {
+        transform: translateX(-300px);
+      }
+
+      /* scroll quickly, after 10%, to next state. and hold a bit */
+      50%,
+      80% {
+        transform: translateX(-600px);
+      }
+
+      /* back to first, relatively quick (small percent distance to previous) */
+      85%,
+      100% {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="viewbox">
+    <div class="content">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </div>
+
+</body>
+
+</html>
