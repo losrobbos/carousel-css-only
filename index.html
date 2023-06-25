@@ -41,7 +41,7 @@
       display: grid;
       place-items: center;
       position: absolute;
-      /* start position based on index (higher index => more right) */
+      /* start position (one position right to viewbox) */
       transform: translateX(var(--image-width));
     }
 
@@ -63,33 +63,34 @@
 
     @keyframes round {
 
-      /* start position (invisible) */
+      /* start position (outside viewbox / invisible) */
       0% {
         transform: translateX(var(--image-width));
       }
 
-      /* VISIBLE */
+      /* VISIBLE in viewbox */
       33.33% {
         transform: translateX(0);
       }
 
-      /* max position left */
+      /* max position left (outside viewbox / invisible) */
       66.66% {
         transform: translateX(calc(-1*var(--image-width)));
         opacity: 1;
       }
 
+      /* back move starts => make invisible! */
       67% {
-        /* back move starts => make invisible! */
         opacity: 0;
       }
 
-      /* shoot back to original position! */
+      /* shoot back to original position (invisible to user) */
       99.99% {
         opacity: 0;
         transform: translateX(var(--image-width));
       }
 
+      /* make visible again, so we can re-start the cycle... */
       100% {
         opacity: 1;
       }
