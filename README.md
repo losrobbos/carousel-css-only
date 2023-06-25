@@ -1,3 +1,4 @@
 # Carousel CSS only
 
-Demo: https://carousel-css-only.vercel.app
+Demo: https://carousel-continuous-css-only.vercel.app
+

@@ -5,11 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carousel CSS only</title>
+  <title>Carousel Continous - CSS only</title>
   <style>
     * {
       margin: 0;
       box-sizing: border-box;
+    }
+
+    :root {
+      --image-count: 3;
+      --image-width: 300px;
+      --image-height: 200px;
     }
 
     body {
@@ -20,60 +26,72 @@
     }
 
     .viewbox {
-      width: 300px;
-      height: 200px;
+      width: var(--image-width);
+      height: var(--image-height);
       border-radius: 20px;
+      border: 1px solid red;
       overflow: hidden;
+      position: relative;
     }
 
     .box {
-      width: 300px;
-      height: 200px;
+      width: var(--image-width);
+      height: var(--image-height);
       border: 1px solid #ccc;
       display: grid;
       place-items: center;
+      position: absolute;
+      /* start position based on index (higher index => more right) */
+      transform: translateX(var(--image-width));
     }
 
     /* background images */
     .box:nth-of-type(1) {
       background-image: url(//source.unsplash.com/300x200?mona-lisa);
+      animation: round 9s ease 0s infinite;
     }
 
     .box:nth-of-type(2) {
       background-image: url(//source.unsplash.com/300x200?monet);
+      animation: round 9s ease 3s infinite;
     }
 
     .box:nth-of-type(3) {
       background-image: url(//source.unsplash.com/300x200?picasso);
+      animation: round 9s ease 6s infinite;
     }
 
-    .content {
-      width: 900px;
-      display: flex;
-      animation: roundAndRound 12s ease 2s infinite;
-    }
+    @keyframes round {
 
-    @keyframes roundAndRound {
+      /* start position (invisible) */
       0% {
-        transform: translateX(0px);
+        transform: translateX(var(--image-width));
       }
 
-      /* scroll quickly, after 10%, to next state. and hold a bit */
-      10%,
-      40% {
-        transform: translateX(-300px);
-      }
-
-      /* scroll quickly, after 10%, to next state. and hold a bit */
-      50%,
-      80% {
-        transform: translateX(-600px);
-      }
-
-      /* back to first, relatively quick (small percent distance to previous) */
-      85%,
-      100% {
+      /* VISIBLE */
+      33.33% {
         transform: translateX(0);
+      }
+
+      /* max position left */
+      66.66% {
+        transform: translateX(calc(-1*var(--image-width)));
+        opacity: 1;
+      }
+
+      67% {
+        /* back move starts => make invisible! */
+        opacity: 0;
+      }
+
+      /* shoot back to original position! */
+      99.99% {
+        opacity: 0;
+        transform: translateX(var(--image-width));
+      }
+
+      100% {
+        opacity: 1;
       }
     }
   </style>
@@ -82,11 +100,9 @@
 <body>
 
   <div class="viewbox">
-    <div class="content">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
   </div>
 
 </body>
