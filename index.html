@@ -22,16 +22,21 @@
       height: 100vh;
       display: grid;
       place-items: center;
+      /* prevents that carousel images flow out of viewport */
       overflow: hidden;
     }
 
     .viewbox {
+      position: relative;
+      /* prevents that we see the other images left & right */
+      overflow: hidden;
+
       width: var(--image-width);
       height: var(--image-height);
+
       border-radius: 20px;
       border: 1px solid red;
-      overflow: hidden;
-      position: relative;
+      background-color: darkolivegreen;
     }
 
     .box {
@@ -48,17 +53,17 @@
 
     /* background images */
     .box:nth-of-type(1) {
-      background-image: url(//source.unsplash.com/300x200?mona-lisa);
+      background-image: url(./images/ananas.jpg);
       animation: round 9s ease 0s infinite;
     }
 
     .box:nth-of-type(2) {
-      background-image: url(//source.unsplash.com/300x200?monet);
+      background-image: url(./images/bananas.jpg);
       animation: round 9s ease 3s infinite;
     }
 
     .box:nth-of-type(3) {
-      background-image: url(//source.unsplash.com/300x200?picasso);
+      background-image: url(./images/cherries.jpg);
       animation: round 9s ease 6s infinite;
     }
 
@@ -91,7 +96,7 @@
         transform: translateX(var(--image-width));
       }
 
-      /* make visible again, so we can re-start the cycle... */
+      /* make visible again, so we can re-start the cycle and fade it in again... */
       100% {
         opacity: 1;
       }
